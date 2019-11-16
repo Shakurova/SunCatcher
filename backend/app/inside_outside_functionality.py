@@ -24,6 +24,36 @@ def get_inout_periods(cache):
                 serie = []
 
 
+def get_light(lat, lng, date=False, time=False):
+    """
+        For a given time and date, return False for night and True for day.
+        https://sunrise-sunset.org/api
+    """
+    import requests
+    import datetime
+    from dateutil.parser import parse
+
+    if not date:
+        date='today'
+
+    if not time:
+        time_now = datetime.datetime.now().time()
+    else:
+        time_now = parse(time).time()
+
+    response = requests.get(f'https://api.sunrise-sunset.org/json?lat={lat}&lng={lng}&date={date}')
+    results = response.json()["results"]
+
+    sunrise, sunset = results["sunrise"], results["sunset"]
+    sunrise_conv = parse(sunrise).time()
+    sunset_conv = parse(sunset).time()
+
+    if sunrise_conv < time_now < sunset_conv:
+        return True
+    else:
+        return False
+
+
 def input_db(cache):
     """Generate entries for user outdoor time based on user cache"""
     import math
@@ -37,6 +67,7 @@ def input_db(cache):
         user_entry["distance"] = math.sqrt((end[2] - begin[2])**2 + (end[3] - begin[3])**2)
         user_entry["start"] = (begin[2], begin[3])
         user_entry["end"] = (end[2], end[3])
+        user_entry["daylight"] = get_light(lat=end[2], lng=end[3])
         print(user_entry)
         # yield(user_entry)
 
