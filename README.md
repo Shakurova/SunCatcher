@@ -1,2 +1,5 @@
-# no_label
-Junction project - No label
+# SunCatcher Mobile App
+## Description
+## Requirments
+## Installation
+## Project structure
