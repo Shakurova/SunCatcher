@@ -8,18 +8,17 @@ import {
   TouchableOpacity
 } from "react-native";
 
+import Calendar from "../components/Calendar";
+// import Agenda from "../components/Agenda";
+
 export default class ScheduleScreen extends React.Component {
   static navigationOptions = {
-    title: "Links"
+    title: "Schedule"
   }
   render() {
     return (
       <ScrollView style={styles.container}>
-        <View>
-          <Text>
-            ScheduleScreen
-          </Text>
-        </View>
+        <Calendar/>
       </ScrollView>
     );
   }

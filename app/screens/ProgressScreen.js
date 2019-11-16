@@ -6,19 +6,17 @@ import {
   FlatList,
   TouchableOpacity
 } from "react-native";
+import BarChart from "../components/BarChart";
 
 
 export default class ProgressScreen extends React.Component {
   static navigationOptions = {
-    title: "app.json"
+    title: "Your Progress"
   }
-  render() {  /**
-    * Go ahead and delete ExpoConfigView and replace it with your content;
-    * we just wanted to give you a quick view of your config.
-    */
+  render() {  
     return (
     <View>
-      <Text>ProgressScreen</Text>
+      <BarChart />
     </View>
     );
   }
