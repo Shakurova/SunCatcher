@@ -15,17 +15,19 @@ import CircleProgress from "../components/CircleProgress";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: "Home"
   }
   render() {
     return (
       <View style={styles.container}>
         <ScrollView
           style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-            <View style={styles.outerMargin}>
-              <CircleProgress style={styles.circleProgress} />
-            </View>
+          contentContainerStyle={styles.contentContainer}
+        >
+          <View style={styles.outerMargin}>
+            <Text style={styles.weeklyText}>Daily Progress</Text>
+
+            <CircleProgress style={styles.circleProgress} />
+          </View>
         </ScrollView>
       </View>
     );
@@ -34,10 +36,15 @@ export default class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#eee"
+    flex: 1
+  },
+  weeklyText: {
+    fontSize: 42,
+    marginTop: -20,
+    textAlign: "center"
   },
   outerMargin: {
+    paddingTop: 30,
     margin: 15
   }
 });

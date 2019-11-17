@@ -9,7 +9,7 @@ import * as Location from 'expo-location';
 import * as TaskManager from "expo-task-manager";
 import Constants from "expo-constants";
 import AppNavigator from './navigation/AppNavigator';
-
+import moment from "moment";
 
 export default class App extends React.Component {
   state = {
@@ -67,15 +67,15 @@ TaskManager.defineTask("GET_LOCATION", async ({ data, error }) => {
   }
   if (data) {
     const { locations } = data;
-    if (locations.length > 0 && false) {
+    if (locations.length > 0) {
       const data = {
-        "latitude": locations[0]["coords"]["latitude"],
-        "longitude": locations[0]["coords"]["longitude"],
+        "lat": locations[0]["coords"]["latitude"],
+        "lon": locations[0]["coords"]["longitude"],
         "user_id": Constants.installationId,
-        "timestamp": locations[0]["timestamp"]
+        "timestamp": moment(locations[0]["timestamp"]).format("YYYY-MM-DD HH:mm:ss") //  "2019-07-16 13:10:00"
       }
       console.log("data", data);
-      const response = await fetch(`http://127.0.0.1/location`, {
+      const response = await fetch(`http://167.172.241.205/activity`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"

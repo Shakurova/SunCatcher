@@ -7,11 +7,8 @@ import {
   FlatList,
   TouchableOpacity
 } from "react-native";
-// import AddTimeSlots from "../components/AddTimeSlots";
 import CalendarList from "../components/CalendarList";
 
-// import Calendar from "../components/Calendar";
-// import Agenda from "../components/Agenda";
 
 export default class ScheduleScreen extends React.Component {
   static navigationOptions = {
@@ -30,8 +27,7 @@ export default class ScheduleScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#eee"
+    flex: 1
   },
   outerMargin: {
     margin: 15
