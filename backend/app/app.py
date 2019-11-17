@@ -2,6 +2,8 @@ import os
 import time
 import requests
 
+from collections import defaultdict
+
 from datetime import date as ddate
 from datetime import datetime, timedelta
 from dateutil.parser import parse
@@ -188,7 +190,7 @@ def update_user_activity():
 def get_user_walks_today():
 
     user_id = request.args.get('user_id')
-    today = datetime.combine(ddate.today() - timedelta(days=1), datetime.min.time())
+    today = datetime.combine(ddate.today(), datetime.min.time())
 
     user_walks = list(db.walk.find({
         'user_id': user_id,
@@ -198,28 +200,56 @@ def get_user_walks_today():
         }
     }))
 
+    walked_total = 0
+    walked_in_the_sun = 0
+
+    for wlk in user_walks:
+        if wlk['weather_code'] and wlk['daylight_code']:
+            walked_in_the_sun += wlk['duration']
+
+        walked_total += wlk['duration']
+
     return jsonify(
-        {"date": "2019-07-16", "walked": 3, "walked_in_the_sun": 2}
+        {"date": today.strftime("%Y-%m-%d"), "walked": walked_total,
+         "walked_in_the_sun": walked_in_the_sun}
     )
 
 
-# @application.route('/todo')
-# def todo():
-#     _todos = db.todo.find()
-#
-#     item = {}
-#     data = []
-#     for todo in _todos:
-#         item = {
-#             'id': str(todo['_id']),
-#             'todo': todo['todo']
-#         }
-#         data.append(item)
-#
-#     return jsonify(
-#         status=True,
-#         data=data
-#     )
+@application.route('/week')
+def get_user_walks_week():
+
+    user_id = request.args.get('user_id')
+    today = datetime.combine(ddate.today(), datetime.min.time())
+    week_ago = today - timedelta(days=6)
+
+    user_walks = list(db.walk.find({
+        'user_id': user_id,
+        'time_bucket': {
+            '$gte': week_ago,
+            '$lt': today + timedelta(days=1)
+        }
+    }))
+
+    week_stats = dict()
+    for d in range(7):
+        wlk_date = (week_ago + timedelta(days=d)).strftime("%Y-%m-%d")
+        week_stats[wlk_date] = {'walked': 0, 'walked_in_the_sun': 0}
+
+    for wlk in user_walks:
+        wlk_date = wlk['time_bucket'].strftime("%Y-%m-%d")
+        if wlk['weather_code'] and wlk['daylight_code']:
+            week_stats[wlk_date]['walked_in_the_sun'] += wlk['duration']
+
+        week_stats[wlk_date]['walked'] += wlk['duration']
+
+    week_stats = [
+        {"date": wlk_date,
+         "walked": wlk_stats['walked'],
+         "walked_in_the_sun": wlk_stats['walked_in_the_sun']}
+        for wlk_date, wlk_stats in week_stats.items()]
+
+    return jsonify(week_stats)
+
 
 if __name__ == "__main__":
     ENVIRONMENT_DEBUG = os.environ.get("APP_DEBUG", True)
