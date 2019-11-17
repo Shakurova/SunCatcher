@@ -2,7 +2,8 @@ import os
 import time
 import requests
 
-from datetime import datetime
+from datetime import date as ddate
+from datetime import datetime, timedelta
 from dateutil.parser import parse
 
 from flask import Flask, request, jsonify
@@ -75,7 +76,6 @@ def get_light(lat, lng, date=False, time=False):
         time = datetime.now().time()
     else:
         time = parse(f'{time}').time()
-
 
     date_time = parse(f'{date} {time}')
 
@@ -184,19 +184,23 @@ def update_user_activity():
     ), 201
 
 
-# @application.route('/today')
-# def get_user_walks_today():
-#
-#     user_id = request.args.get('user_id')
-#     today = datetime.today()
-#
-#     db.walk.find({
-#         'time_bucket'
-#     })
-#
-#     return jsonify(
-#         {"date": 2019 - 07 - 16, "walked": 3, "walked_in_the_sun": 2}
-#     )
+@application.route('/today')
+def get_user_walks_today():
+
+    user_id = request.args.get('user_id')
+    today = datetime.combine(ddate.today() - timedelta(days=1), datetime.min.time())
+
+    user_walks = list(db.walk.find({
+        'user_id': user_id,
+        'time_bucket': {
+            '$gte': today,
+            '$lt': today + timedelta(days=1)
+        }
+    }))
+
+    return jsonify(
+        {"date": "2019-07-16", "walked": 3, "walked_in_the_sun": 2}
+    )
 
 
 # @application.route('/todo')
