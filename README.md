@@ -23,6 +23,3 @@ In the future we want to add a bunch of new cool features:
 [TRY DEMO]()
 ## User Scenarios
 add gifs with senarious
-## Requirments
-## Installation
-## Project structure
