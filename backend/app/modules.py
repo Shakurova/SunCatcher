@@ -34,12 +34,10 @@ def get_weather(lat, lng, date, time):
     results = response.json()
     # print(results)
 
-    if 'cloudy' in results['currently']['icon']:
-        return 0, results['currently']['icon']
-    elif 'clear' in results['currently']['icon']:
-        return 1, results['currently']['icon']
+    if results['currently']['cloudCover'] < 0.50:
+        return 1
     else:
-        return 0.5, results['currently']['icon']
+        return 0, results['currently']['cloudCover']
 
 
 def get_light(lat, lng, date=False, time=False):
@@ -90,6 +88,23 @@ def main(lat, lng, date, time):
             "daylight_code": daylight_code
             }
 
+def predict_future(lat, lng):
+    """
+        For the next week return all the sunny hours.
+    """
+
+    response = requests.get(f'https://api.darksky.net/forecast/aec3225ddd6f2dc01389770d446297d3/{lat},{lng}')
+    results = response.json()
+
+    arr = []
+    for hour in results["hourly"]["data"]:
+        time = datetime.utcfromtimestamp(int(hour["time"])).strftime('%Y-%m-%d %H:%M:%S')
+        print(time, hour["cloudCover"])
+        if hour["cloudCover"] < 0.50:
+            arr.append(time)
+
+    return arr
+
 if __name__ == "__main__":
     # print(parse_location(location='Helsinki'))
     # print(parse_time(date='2019-11-17', time='1:06:55'))
@@ -104,4 +119,5 @@ if __name__ == "__main__":
     # print(get_light(lat=60.1699, lng=24.9384, date='2019-07-16', time='9:06:55'))
     # print(get_light(lat=60.1699, lng=24.9384, date='2019-07-16', time='13:06:55'))
 
-    print(main(lat=60.1674086, lng=24.9425683, date='2019-11-17', time='1:6:55'))
+    print(main(lat=60.1674086, lng=24.9425683, date='2019-11-17', time='01:06:55'))
+    json.dump(predict_future(lat=60.1674086, lng=24.9425683), open('sun.json', 'w'))
