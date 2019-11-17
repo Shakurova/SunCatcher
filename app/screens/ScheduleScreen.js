@@ -7,8 +7,10 @@ import {
   FlatList,
   TouchableOpacity
 } from "react-native";
+// import AddTimeSlots from "../components/AddTimeSlots";
+import CalendarList from "../components/CalendarList";
 
-import Calendar from "../components/Calendar";
+// import Calendar from "../components/Calendar";
 // import Agenda from "../components/Agenda";
 
 export default class ScheduleScreen extends React.Component {
@@ -18,7 +20,9 @@ export default class ScheduleScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Calendar/>
+        <View style={styles.outerMargin}>
+          <CalendarList/>
+        </View>
       </ScrollView>
     );
   }
@@ -27,7 +31,9 @@ export default class ScheduleScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
+    backgroundColor: "#eee"
   },
+  outerMargin: {
+    margin: 15
+  }
 });

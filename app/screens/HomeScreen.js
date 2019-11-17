@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 
 import CircleProgress from "../components/CircleProgress";
-import AddTimeSlots from "../components/AddTimeSlots";
 
 
 export default class HomeScreen extends React.Component {
@@ -26,7 +25,6 @@ export default class HomeScreen extends React.Component {
           contentContainerStyle={styles.contentContainer}>
             <View style={styles.outerMargin}>
               <CircleProgress style={styles.circleProgress} />
-              <AddTimeSlots style={styles.addTimeSlots} />
             </View>
         </ScrollView>
       </View>
@@ -41,8 +39,5 @@ const styles = StyleSheet.create({
   },
   outerMargin: {
     margin: 15
-  },
-  contentContainer: {
-    paddingTop: 30
   }
 });
