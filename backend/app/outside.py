@@ -1,22 +1,31 @@
+import requests
+import math
 
 
 def in_out_decider(lat, lon):
     """Decide if the person is inside or outside"""
-    import requests
-
     response = requests.get("https://nominatim.openstreetmap.org/reverse?format=json&lat="
                             + lat + "&lon=" + lon + "&zoom=18&addressdetails=1")
     bbox = response.json()["boundingbox"]
     return bbox[0] <= lat <= bbox[1] and bbox[2] <= lon <= bbox[3]
 
 
+def momentum(x, beta=0.7):
+
+    res = copy(x)
+    for i in range(1, len(x)):
+        res[i] = beta*res[i-1] + (1 - beta)*x[i]
+
+    return res
+
+
 def get_inout_periods(cache):
     """Find periods of outdoor time (> 1min)"""
-    all = [in_out_decider(str(cache_entry[2]), str(cache_entry[3])) for cache_entry in cache]
+    all_ = [in_out_decider(str(cache_entry[2]), str(cache_entry[3])) for cache_entry in cache]
     serie = []
-    for i in range(0, len(all) - 1):
-        if not all[i]:
-            if all[i] == all[i + 1]:
+    for i in range(0, len(all_) - 1):
+        if not all_[i]:
+            if all_[i] == all_[i + 1]:
                 serie.append(cache[i])
             else:
                 serie.append(cache[i])
@@ -26,8 +35,6 @@ def get_inout_periods(cache):
 
 def input_db(cache):
     """Generate entries for user outdoor time based on user cache"""
-    import math
-
     user_entry = {}
     for begin, end, dur in get_inout_periods(cache):
         user_entry["user_id"] = begin[0]
