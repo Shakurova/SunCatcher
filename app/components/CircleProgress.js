@@ -13,16 +13,11 @@ class CircleProgress extends Component {
               <Text style={styles.text}>Hang in there!</Text>
             </View>
 
-            <View
-              style={[
-                StyleSheet.absoluteFill,
-                styles.graph
-              ]}
-            >
+            <View style={[StyleSheet.absoluteFill, styles.graph]}>
               <Svg height="100%" width="100%" viewBox="0 0 100 100">
                 <Defs>
                   <ClipPath id="clip">
-                    <Rect x="0" y="50" width="100" height="50" />
+                    <Rect x="0" y="70" width="100" height="100" />
                   </ClipPath>
                 </Defs>
                 <Circle
@@ -32,7 +27,15 @@ class CircleProgress extends Component {
                   stroke="blue"
                   strokeWidth="2.5"
                   fill="transparent"
-                //   clipPath="#clip"
+                />
+                <Circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  stroke="blue"
+                  strokeWidth="2.5"
+                  fill="red"
+                  clipPath="#clip"
                 />
               </Svg>
               <View style={styles.extraSpace}>

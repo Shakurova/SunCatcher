@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Button } from 'react-native';
-
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Button, Modal } from 'react-native';
+import * as Calendar from "expo-calendar";
 class AddTimeSlots extends Component {
     constructor(props) {
         super(props);
+    }
+
+    askWhichCalendar = (data) => {
+      
     }
     render() {
         return (
@@ -40,17 +44,12 @@ class AddTimeSlots extends Component {
                   onPress={() => Alert.alert("Simple Button pressed")}
                 />
               </View>
-              <View style={styles.bottomButton}>
-                <Button
-                  title="Add entry"
-                  onPress={() => Alert.alert("Simple Button pressed")}
-                />
-              </View>
             </View>
           </View>
         );
     }
     componentDidMount() {
+      
     }
 }
 
@@ -90,11 +89,8 @@ const styles = StyleSheet.create({
     margin: 8
   },
   textHeader: {
-    fontWeight: "bold"
-  },
-  bottomButton: {
-      width: "100%",
-      alignItems: "center"
+    fontWeight: "bold",
+    marginBottom: 0
   }
 });
 

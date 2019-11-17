@@ -1,21 +1,30 @@
 {
   "expo": {
     "name": "SunCatcher",
-    "slug": "app",
-    "privacy": "public",
+    "slug": "sun-catcher",
+    "version": "1.0.0",
+    "privacy": "unlisted",
     "sdkVersion": "35.0.0",
+    "ios": {
+      "bundleIdentifier": "com.gijsme.duwtje",
+      "icon": "./assets/images/icon.png"
+    },
+    "android": {
+      "package": "com.suncatcher.suncatcher",
+      "icon": "./assets/images/icon.png",
+      "versionCode": 1,
+      "permissions": ["READ_CALENDAR", "WRITE_CALENDAR", "ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"]
+    },
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
-    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#fdfdfd"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,8 +32,5 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    }
   }
 }

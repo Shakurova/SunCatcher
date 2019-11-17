@@ -6,7 +6,7 @@ import {
   FlatList,
   TouchableOpacity
 } from "react-native";
-import BarChart from "../components/BarChart";
+import ChartBar from "../components/ChartBar";
 
 
 export default class ProgressScreen extends React.Component {
@@ -15,9 +15,20 @@ export default class ProgressScreen extends React.Component {
   }
   render() {  
     return (
-    <View>
-      <BarChart />
-    </View>
+      <View style={styles.progress}>
+        <ChartBar/>
+      </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 15,
+    backgroundColor: "#fff"
+  },
+  progress: {
+    margin: 10
+  }
+});
