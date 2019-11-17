@@ -23,5 +23,5 @@ In the future we want to add a bunch of new cool features:
 [TRY DEMO]()
 ## User Scenarios
 <p align="center">
-  <img src="https://github.com/Shakurova/SunCatcher/blob/master/barchart.png" width="40" height="200">
+  <img src="https://github.com/Shakurova/SunCatcher/blob/master/barchart.png" width="50%">
 </p>
