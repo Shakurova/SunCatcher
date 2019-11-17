@@ -24,4 +24,5 @@ In the future we want to add a bunch of new cool features:
 ## User Scenarios
 <p align="center">
   <img src="https://github.com/Shakurova/SunCatcher/blob/master/barchart.png" width="35%">
+  <img src="https://github.com/Shakurova/SunCatcher/blob/master/schedule.png" width="35%">
 </p>
