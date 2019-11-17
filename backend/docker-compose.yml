@@ -23,7 +23,9 @@ services:
     tty: true
 
   mongodb:
-    image: mongo:4.0.8
+    build:
+      context: mongo
+      dockerfile: Dockerfile
     container_name: mongodb
     command: mongod --noauth
     environment:

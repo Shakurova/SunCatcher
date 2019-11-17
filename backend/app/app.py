@@ -117,10 +117,8 @@ def create_new_walk(time_bucket, user_id, lat, lon):
         'user_id': user_id,
         'ltd': lat,
         'lng': lon,
-
     }
 
-    # ToDo: Call api to get weather, weather_description, daylight
     date = time_bucket.date().strftime("%Y-%m-%d")
     time = time_bucket.time().strftime("%H:%M:%S")
     weather_details = get_weather_light(lat, lon, date, time)
@@ -185,6 +183,39 @@ def update_user_activity():
         message='User location saved successfully!'
     ), 201
 
+
+# @application.route('/today')
+# def get_user_walks_today():
+#
+#     user_id = request.args.get('user_id')
+#     today = datetime.today()
+#
+#     db.walk.find({
+#         'time_bucket'
+#     })
+#
+#     return jsonify(
+#         {"date": 2019 - 07 - 16, "walked": 3, "walked_in_the_sun": 2}
+#     )
+
+
+# @application.route('/todo')
+# def todo():
+#     _todos = db.todo.find()
+#
+#     item = {}
+#     data = []
+#     for todo in _todos:
+#         item = {
+#             'id': str(todo['_id']),
+#             'todo': todo['todo']
+#         }
+#         data.append(item)
+#
+#     return jsonify(
+#         status=True,
+#         data=data
+#     )
 
 if __name__ == "__main__":
     ENVIRONMENT_DEBUG = os.environ.get("APP_DEBUG", True)
