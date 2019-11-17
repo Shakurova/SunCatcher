@@ -4,7 +4,7 @@
 
 # SunCatcher Mobile App
 ## Description
-Suncatcher app helps people to get enough sunlight during the day and prevent seasonal affective depression (SAD). Studies show that around 21% of Finnish population suffers from it. SAD mostly occurs during wintertime when people do not receive enough vitamin D and do not see a lot of daylight. Have you ever felt depressed, had low energy or sleeping problems in winter? You probably need to be outside more often.
+Suncatcher app helps people to get enough sunlight during the day and prevent seasonal affective depression (SAD). Studies show that around [21% of Finnish population](https://www.researchgate.net/figure/Percentage-of-vegetarians-suffering-from-SAD-in-Finland_tbl2_318601508) suffers from it. SAD mostly occurs during wintertime when people do not receive enough vitamin D and do not see a lot of daylight. Have you ever felt depressed, had low energy or sleeping problems in winter? You probably need to be outside more often.
 
 Suncatcher allows to estimate the amount of sunlight you get daily (*30 min per day is already enough!*), track how much time you have spent outside during nice weather in the past week and plan your outside activities. 
 
