@@ -22,4 +22,6 @@ In the future we want to add a bunch of new cool features:
 
 [TRY DEMO]()
 ## User Scenarios
-add gifs with senarious
+<p align="center">
+  <img src="https://github.com/Shakurova/SunCatcher/blob/master/barchart.png">
+</p>
